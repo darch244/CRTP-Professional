@@ -2622,5 +2622,3 @@ Add-DomainGroupMember           Set-DomainObjectOwner
 By DarcHacker.
 
 LinkedIn:www.linkedin.com/in/mostafa-ibrahim-60b543341
-ENDOFFILE
-echo "Done. Lines: $(wc -l < /mnt/user-data/outputs/CRTP_Altered_Security_Master_Database.md)"
